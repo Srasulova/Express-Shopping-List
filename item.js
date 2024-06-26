@@ -35,7 +35,7 @@ class Item {
 
   //   Delete item
   static remove(name) {
-    let foundIndex = items.foundIndex((i) => i.name === name);
+    let foundIndex = items.findIndex((i) => i.name === name);
     if (foundIndex === -1) {
       throw { message: "Not found", status: 404 };
     }

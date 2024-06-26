@@ -5,7 +5,7 @@ const Item = require("../item");
 // Get all items
 router.get("", (req, res, next) => {
   try {
-    return res.json(Item.findAll());
+    return res.json({ items: Item.findAll() });
   } catch (error) {
     return next(error);
   }
@@ -34,7 +34,7 @@ router.get("/:name", (req, res, next) => {
 // Update an item
 router.patch("/:name", (req, res, next) => {
   try {
-    let foundItem = Item.update(req.params.name, req.params.price);
+    let foundItem = Item.update(req.params.name, req.body);
     return res.json({ item: foundItem });
   } catch (error) {
     return next(error);
@@ -45,8 +45,10 @@ router.patch("/:name", (req, res, next) => {
 router.delete("/:name", (req, res, next) => {
   try {
     Item.remove(req.params.name);
-    return json({ message: "deleted" });
+    return res.json({ message: "Deleted" });
   } catch (error) {
     return next(error);
   }
 });
+
+module.exports = router;
